@@ -6,11 +6,12 @@ import java.security.MessageDigest;
  * 写一个MD5算法,运行结果与MySQL的md5()函数相同
  * 将明文密码转成MD5密码
  * 123456->e10adc3949ba59abbe56e057f20f883e
+ * 987654->mqufbrtxjpnmbgfh
  */
 public final class Md5Util {
 	private Md5Util(){}
 	/**
-	 * 将明文密码转成MD5密码 
+	 * 将明文密码转成MD5密码
 	 */
 	public static String encodeByMd5(String password) throws Exception{
 		//Java中MessageDigest类封装了MD5和SHA算法，今天我们只要MD5算法
