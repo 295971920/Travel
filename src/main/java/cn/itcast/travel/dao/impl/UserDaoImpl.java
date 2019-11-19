@@ -19,6 +19,7 @@ import javax.jws.WebService;
 public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+
     /**
      * 根据用户名查询用户信息
      *
@@ -30,13 +31,14 @@ public class UserDaoImpl implements UserDao {
         User user = null;
         try {
             //定义SQL语句
-            String sql = "select * from tab_user where username = '"+username+"'";
+            String sql = "select * from tab_user where username = '" + username + "'";
             //select * from tab_user where username = 'usernae';
             //执行SQL
             user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class));
         } catch (DataAccessException e) {
 //            e.printStackTrace();
-            System.out.println("用户已存在："+username.toString());
+            //如果用户存在，将用户名在控制台打印出来
+            System.out.println("用户已存在：" + username.toString());
             return null;
         }
         return user;
@@ -50,8 +52,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void save(User user) {
         //定义SQL
-        String sql = "insert into tab_user(username,password,name,birthday,sex,telephone,email)" +
-                "values(?,?,?,?,?,?,?) ";
+        String sql = "insert into tab_user(username,password,name,birthday,sex,telephone,email,status,code)" +
+                "values(?,?,?,?,?,?,?,?,?) ";
         //执行SQL
         template.update(sql,
                 user.getUsername(),
@@ -60,7 +62,63 @@ public class UserDaoImpl implements UserDao {
                 user.getBirthday(),
                 user.getSex(),
                 user.getTelephone(),
-                user.getEmail());
+                user.getEmail(),
+                user.getStatus(),
+                user.getCode());
+    }
+
+    /**
+     * 根据激活码查询用户对象
+     *
+     * @param code
+     * @return
+     */
+    @Override
+    public User findCode(String code) {
+        User user = null;
+        try {
+            //定义SQL语句
+            String sql = "select * from tab_user where code = ? ";
+            //执行SQL语句
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), code);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    /**
+     * 修改指定用户激活状态
+     *
+     * @param user
+     */
+    @Override
+    public void updateStatus(User user) {
+        //定义sql
+        String sql = "update tab_user set status = 'Y' where uid = ? ";
+        template.update(sql, user.getUid());
+        //执行SQL
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        User user = null;
+        try {
+            //定义SQL语句
+            String sql = "select * from tab_user where username = ? and password = ? ";
+            //执行sql
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        return user;
     }
 }
 
