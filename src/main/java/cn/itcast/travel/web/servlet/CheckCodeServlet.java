@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * 验证码
+ * 验证码生成类
  */
 @WebServlet("/checkCode")
 public class CheckCodeServlet extends HttpServlet {
