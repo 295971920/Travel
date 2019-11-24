@@ -6,7 +6,7 @@ import cn.itcast.travel.domain.User;
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
  * @CreateDate : 2019-11-14 20:36
- * @Description :
+ * @Description : 用户接口
  **/
 public interface UserDao {
 

@@ -13,7 +13,7 @@ import javax.jws.WebService;
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
  * @CreateDate : 2019-11-14 20:39
- * @Description :
+ * @Description : 用户service
  **/
 //@WebService
 public class UserServiceImpl implements UserService {
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         //设置激活码状态
         user.setStatus("N");
         //激活邮件发送，邮件正文？
-        String content = "<a href='http://localhost/travel/activeUserServlet?code="+user.getCode()+"'>点击激活【黑马旅游网】";
+        String content = "<a href='http://localhost/travel/user/active?code="+user.getCode()+"'>点击激活【黑马旅游网】";
         MailUtils.sendMail(user.getEmail(),content,"激活邮件");
         //保存用户信息
         userDao.save(user);
