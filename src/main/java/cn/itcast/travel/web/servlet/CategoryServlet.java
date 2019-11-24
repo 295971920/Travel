@@ -16,7 +16,7 @@ import java.util.List;
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
  * @CreateDate : 2019-11-24 17:40
- * @Description :
+ * @Description : 类别分类
  **/
 @WebServlet("/category/*")
 public class CategoryServlet extends BaseServlet {
