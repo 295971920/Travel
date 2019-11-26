@@ -27,11 +27,13 @@ public final class JedisUtil {
         }
         //获取数据，设置到JedisPoolConfig中
         JedisPoolConfig config = new JedisPoolConfig();
+        //可用连接实例的最大数目，默认值为50
         config.setMaxTotal(Integer.parseInt(pro.getProperty("maxTotal")));
+        //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例，默认值也是10
         config.setMaxIdle(Integer.parseInt(pro.getProperty("maxIdle")));
 
         //初始化JedisPool
-        jedisPool = new JedisPool(config, pro.getProperty("host"), Integer.parseInt(pro.getProperty("port")));
+        jedisPool = new JedisPool(config, pro.getProperty("host"), Integer.parseInt(pro.getProperty("port")),10000,pro.getProperty("password"));
 
 
     }

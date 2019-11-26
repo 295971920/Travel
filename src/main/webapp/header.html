@@ -5,7 +5,7 @@
         $.get("user/findOne",{},function(data) {
             //{uid:1,name:'李四'}
             if(data != null){//有强迫症，Session为空时，name值为null
-                var msg = "欢迎回来，"+data.name;
+                var msg = "欢迎回来,"+ data.name;
                 $("#span_username").html(msg);
             }
         });
