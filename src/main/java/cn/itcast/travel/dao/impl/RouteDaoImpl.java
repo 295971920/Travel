@@ -19,7 +19,6 @@ public class RouteDaoImpl implements RouteDao {
 
     /**
      * 根据cid查询总记录数
-     *
      * @param cid
      * @return
      */
@@ -33,7 +32,6 @@ public class RouteDaoImpl implements RouteDao {
 
     /**
      * 根据cid,start ,pageSize 查询当前页的数据集合
-     *
      * @param cid
      * @param start
      * @param pageSize
@@ -42,7 +40,7 @@ public class RouteDaoImpl implements RouteDao {
     @Override
     public List<Route> findByPage(int cid, int start, int pageSize) {
         //定义sql 语句
-        String sql = "select *from tab_route where cid = ?,limit ?,?";
+        String sql = "select * from tab_route where cid = ? limit ?,?";
         //执行sql语句
         return template.query(sql,new BeanPropertyRowMapper<>(Route.class),cid,start,pageSize);
     }

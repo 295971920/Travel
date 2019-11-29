@@ -6,6 +6,8 @@ import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
 import cn.itcast.travel.service.RouteService;
 
+import java.util.List;
+
 /**
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
@@ -30,8 +32,30 @@ public class RouteServiceImpl implements RouteService {
         //设置单前页面码
         pb.setCurrentPage(currentPage);
         //设置每一页显示的条数
-        int totalCount = routeDao.findTotalCount(cid);
         pb.setPageSize(pageSize);
-        return null;
+
+        //设置总数记录数
+        int totalCount = routeDao.findTotalCount(cid);
+        pb.setPageSize(totalCount);
+        //设置当前页显示的数据集合
+        int start = (currentPage-1) * pageSize;//开始的记录数
+        List<Route> list = routeDao.findByPage(cid, start, pageSize);
+        pb.setList(list);
+
+        //设置总页数= 总记录数/每页显示的条数
+        int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize :(totalCount / pageSize) + 1 ;
+        pb.setTotalPage(totalPage);
+        return pb;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
