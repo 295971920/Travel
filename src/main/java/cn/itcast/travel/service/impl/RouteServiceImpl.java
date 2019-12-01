@@ -36,7 +36,7 @@ public class RouteServiceImpl implements RouteService {
 
         //设置总数记录数
         int totalCount = routeDao.findTotalCount(cid);
-        pb.setPageSize(totalCount);
+        pb.setTotalCount(totalCount);
         //设置当前页显示的数据集合
         int start = (currentPage-1) * pageSize;//开始的记录数
         List<Route> list = routeDao.findByPage(cid, start, pageSize);
